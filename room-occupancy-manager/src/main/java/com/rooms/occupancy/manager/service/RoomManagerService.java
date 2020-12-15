@@ -1,28 +1,25 @@
 package com.rooms.occupancy.manager.service;
 
 import com.rooms.occupancy.manager.beans.OccupancyManager;
+import com.rooms.occupancy.manager.beans.PotentialGuest;
 import com.rooms.occupancy.manager.beans.RoomRequest;
-import com.rooms.occupancy.manager.util.RoomType;
 import com.rooms.occupancy.manager.util.PotentialGuests;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.*;
 
-@Service
+@Component
 public class RoomManagerService {
 
-
     public OccupancyManager getOccupancy(RoomRequest room) throws IOException {
-        Map<RoomType, List<Integer>> guestMap = PotentialGuests.getPotentialGuests();
-
-        return calculateOccupancy(room, guestMap);
+        PotentialGuest potentialGuests = PotentialGuests.getPotentialGuests();
+        return calculateOccupancy(room, potentialGuests);
     }
 
-    public OccupancyManager calculateOccupancy(RoomRequest room, Map<RoomType, List<Integer>> guestMap) {
-        List<Integer> premiumGuests = guestMap.get(RoomType.PREMIUM);
-        List<Integer> economyGuests = guestMap.get(RoomType.ECONOMY);
+    public OccupancyManager calculateOccupancy(RoomRequest room, PotentialGuest potentialGuests) {
+        List<Integer> premiumGuests = potentialGuests.getPremium();
+        List<Integer> economyGuests = potentialGuests.getEconomy();
 
         int premiumGuestsCount = premiumGuests.size();
         int economyGuestsCount = economyGuests.size();
@@ -72,25 +69,23 @@ public class RoomManagerService {
 
                 int outBound = allocatedEconomyRooms+ Math.min(remainingPremiumRooms, economyGuestsCount);
 
-                for(int i=allocatedEconomyRooms;i<outBound;i++) {
+                for(int i = allocatedEconomyRooms;i<outBound;i++) {
                     totalPremiumPrice += economyGuests.get(i);
                     allocatedPremiumRooms++;
                 }
-
-
             }
 
         } else {
             allocatedEconomyRooms = room.getEconomyRooms();
-
             totalEconomyPrice = economyGuests
                                 .stream()
                                 .limit(room.getEconomyRooms())
                                 .reduce(0, Integer::sum);
-
-
         }
-        return OccupancyManager.of(totalEconomyPrice, allocatedEconomyRooms,allocatedPremiumRooms, totalPremiumPrice);
+        return OccupancyManager.of(totalEconomyPrice,
+                                    allocatedEconomyRooms,
+                                    allocatedPremiumRooms,
+                                    totalPremiumPrice);
     }
 }
 

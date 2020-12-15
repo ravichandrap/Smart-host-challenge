@@ -1,6 +1,7 @@
 package com.rooms.occupancy.manager.util;
 
 import com.google.gson.*;
+import com.rooms.occupancy.manager.beans.PotentialGuest;
 import com.rooms.occupancy.manager.exception.FileNotFoundException;
 import com.rooms.occupancy.manager.exception.PotentialGuestsException;
 
@@ -15,23 +16,23 @@ public class PotentialGuests {
     private static final String GUESTS = "guests";
     private static final String FILE_NAME = "potential-guests.json";
     private static final int PREMIUM_START_PRICE = 100;
-    private static Map<RoomType, List<Integer>> potentialGuests = null;
+    private static PotentialGuest potentialGuests = null;
 
     private PotentialGuests() {}
 
-    public static Map<RoomType, List<Integer>> getPotentialGuests() {
+    public static PotentialGuest getPotentialGuests() {
         if(potentialGuests == null)
             potentialGuests = readGuestData();
         return potentialGuests;
     }
 
-    private static Map<RoomType, List<Integer>> readGuestData() {
+    private static PotentialGuest readGuestData() {
         Optional<JsonArray> optional = readFile();
         JsonArray guestsArray = optional.orElseThrow(() -> new PotentialGuestsException(FILE_NAME));
         return getRoomTypeListMap(guestsArray);
     }
 
-    private static Map<RoomType, List<Integer>> getRoomTypeListMap(JsonArray guestsArray) {
+    private static PotentialGuest getRoomTypeListMap(JsonArray guestsArray) {
         List<Integer> premium = new ArrayList<>();
         List<Integer> economy = new ArrayList<>();
 
@@ -43,13 +44,10 @@ public class PotentialGuests {
                 premium.add(value);
             }
         });
-        Map<RoomType, List<Integer>> guestMap = new EnumMap<>(RoomType.class);
         premium.sort(Collections.reverseOrder());
         economy.sort(Collections.reverseOrder());
 
-        guestMap.put(RoomType.PREMIUM, premium);
-        guestMap.put(RoomType.ECONOMY, economy);
-        return guestMap;
+        return PotentialGuest.of(premium, economy);
     }
 
     private static Optional<JsonArray> readFile() {
