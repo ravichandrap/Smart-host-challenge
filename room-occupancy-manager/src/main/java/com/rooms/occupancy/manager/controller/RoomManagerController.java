@@ -1,6 +1,7 @@
 package com.rooms.occupancy.manager.controller;
 
 import com.rooms.occupancy.manager.beans.Occupancy;
+import com.rooms.occupancy.manager.beans.OccupancyManager;
 import com.rooms.occupancy.manager.beans.RoomRequest;
 import com.rooms.occupancy.manager.service.RoomManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -19,8 +21,8 @@ public class RoomManagerController {
     private RoomManagerService service;
 
     @PostMapping
-    public ResponseEntity<Occupancy> occupancy(@RequestBody RoomRequest room) {
-        return ResponseEntity.of(service.getOccupancy(room));
+    public OccupancyManager occupancy(@RequestBody RoomRequest room) throws IOException {
+        return service.getOccupancy(room);
     }
 
     /*

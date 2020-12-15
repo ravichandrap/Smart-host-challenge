@@ -6,16 +6,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class RoomUtilTest {
+class PotentialGuestsTest {
 
     @InjectMocks
-    private RoomUtil util;
+    private PotentialGuests util;
 
     @Test
     void testGetPotentialGuests() throws IOException {
-        RoomUtil.getPotentialGuests();
+        PotentialGuests.getPotentialGuests();
     }
 }

@@ -1,30 +1,30 @@
 package com.rooms.occupancy.manager.beans;
 
 public class RoomRequest {
-    private Long premiumRooms;
-    private Long economyRooms;
+    private Integer premiumRooms;
+    private Integer economyRooms;
 
-    public RoomRequest(Long premiumRooms, Long economyRooms) {
+    public RoomRequest(Integer premiumRooms, Integer economyRooms) {
         this.premiumRooms = premiumRooms;
         this.economyRooms = economyRooms;
     }
-    public static RoomRequest of(Long premiumRooms, Long economyRooms) {
+    public static RoomRequest of(Integer premiumRooms, Integer economyRooms) {
         return new RoomRequest(premiumRooms, economyRooms);
     }
 
-    public Long getPremiumRooms() {
+    public Integer getPremiumRooms() {
         return premiumRooms;
     }
 
-    public void setPremiumRooms(Long premiumRooms) {
+    public void setPremiumRooms(Integer premiumRooms) {
         this.premiumRooms = premiumRooms;
     }
 
-    public Long getEconomyRooms() {
+    public Integer getEconomyRooms() {
         return economyRooms;
     }
 
-    public void setEconomyRooms(Long economyRooms) {
+    public void setEconomyRooms(Integer economyRooms) {
         this.economyRooms = economyRooms;
     }
 

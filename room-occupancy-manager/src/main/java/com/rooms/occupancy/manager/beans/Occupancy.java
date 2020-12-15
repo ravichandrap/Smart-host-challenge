@@ -6,32 +6,32 @@ import lombok.Setter;
 
 
 public class Occupancy {
-    private Long premium;
-    private Long economy;
+    private Integer premium;
+    private Integer economy;
 
-    Occupancy(Long premium,
-              Long economy) {
+    Occupancy(Integer premium,
+              Integer economy) {
         this.premium = premium;
         this.economy = economy;
     }
-    public static Occupancy of(Long premium,
-                               Long economy) {
+    public static Occupancy of(Integer premium,
+                               Integer economy) {
     return new Occupancy(premium, economy);
     }
 
-    public Long getPremium() {
+    public Integer getPremium() {
         return premium;
     }
 
-    public void setPremium(Long premium) {
+    public void setPremium(Integer premium) {
         this.premium = premium;
     }
 
-    public Long getEconomy() {
+    public Integer getEconomy() {
         return economy;
     }
 
-    public void setEconomy(Long economy) {
+    public void setEconomy(Integer economy) {
         this.economy = economy;
     }
 
