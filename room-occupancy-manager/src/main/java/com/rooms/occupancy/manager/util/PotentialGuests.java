@@ -1,6 +1,8 @@
 package com.rooms.occupancy.manager.util;
 
 import com.google.gson.*;
+import com.rooms.occupancy.manager.exception.FileNotFoundException;
+import com.rooms.occupancy.manager.exception.PotentialGuestsException;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -17,30 +19,31 @@ public class PotentialGuests {
 
     private PotentialGuests() {}
 
-
-    public static Map<RoomType, List<Integer>> getPotentialGuests()
-            throws IOException {
-        if(potentialGuests == null) {
+    public static Map<RoomType, List<Integer>> getPotentialGuests() {
+        if(potentialGuests == null)
             potentialGuests = readGuestData();
-        }
         return potentialGuests;
     }
 
-    private static Map<RoomType, List<Integer>> readGuestData() throws IOException {
+    private static Map<RoomType, List<Integer>> readGuestData() {
+        Optional<JsonArray> optional = readFile();
+        JsonArray guestsArray = optional.orElseThrow(() -> new PotentialGuestsException(FILE_NAME));
+        return getRoomTypeListMap(guestsArray);
+    }
 
-        JsonArray guestsArray = readFile().get();
+    private static Map<RoomType, List<Integer>> getRoomTypeListMap(JsonArray guestsArray) {
         List<Integer> premium = new ArrayList<>();
         List<Integer> economy = new ArrayList<>();
 
-        for(JsonElement element: guestsArray) {
-            int value = element.getAsInt();
-            if(PREMIUM_START_PRICE > value) {
+        guestsArray.forEach(element -> {
+            final int value = element.getAsInt();
+            if (PREMIUM_START_PRICE > value) {
                 economy.add(value);
             } else {
                 premium.add(value);
             }
-        }
-        Map<RoomType, List<Integer>> guestMap = new HashMap<>(2);
+        });
+        Map<RoomType, List<Integer>> guestMap = new EnumMap<>(RoomType.class);
         premium.sort(Collections.reverseOrder());
         economy.sort(Collections.reverseOrder());
 
@@ -49,14 +52,21 @@ public class PotentialGuests {
         return guestMap;
     }
 
-    private static Optional<JsonArray> readFile() throws IOException {
-        Reader reader = Files.newBufferedReader(Paths.get(FILE_NAME));
+    private static Optional<JsonArray> readFile() {
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(Paths.get(FILE_NAME));
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new FileNotFoundException(FILE_NAME);
+        }
+
         JsonObject parser = JsonParser.parseReader(reader)
                                         .getAsJsonObject();
         JsonElement element = parser.get(GUESTS);
-        //TO-DO :Exception handling
-        return element == null
-                ? Optional.empty()
-                :Optional.of(element.getAsJsonArray());
+        if(element == null)
+           throw new PotentialGuestsException(FILE_NAME);
+
+        return Optional.of(element.getAsJsonArray());
     }
 }
