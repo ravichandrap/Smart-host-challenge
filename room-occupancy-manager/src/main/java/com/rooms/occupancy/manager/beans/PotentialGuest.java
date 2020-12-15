@@ -7,11 +7,12 @@ public class PotentialGuest {
     List<Integer> economy = null;
 
     private PotentialGuest(List<Integer> premium, List<Integer> economy) {
-       this.economy = economy;
-       this.premium = premium;
+        this.economy = economy;
+        this.premium = premium;
     }
+
     public static PotentialGuest of(List<Integer> premium, List<Integer> economy) {
-       return new PotentialGuest(premium, economy);
+        return new PotentialGuest(premium, economy);
     }
 
     public List<Integer> getPremium() {

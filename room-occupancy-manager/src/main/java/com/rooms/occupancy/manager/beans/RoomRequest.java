@@ -8,6 +8,7 @@ public class RoomRequest {
         this.premiumRooms = premiumRooms;
         this.economyRooms = economyRooms;
     }
+
     public static RoomRequest of(Integer premiumRooms, Integer economyRooms) {
         return new RoomRequest(premiumRooms, economyRooms);
     }

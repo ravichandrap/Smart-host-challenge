@@ -5,7 +5,6 @@ public class OccupancyManager {
     private int allocatedEconomyRooms;
     private int allocatedPremiumRooms;
     private int totalPremiumPrice;
-    private int grandTotal;
 
     private OccupancyManager(int totalEconomyPrice, int allocatedEconomyRooms, int allocatedPremiumRooms, int totalPremiumPrice) {
         this.totalEconomyPrice = totalEconomyPrice;
@@ -13,17 +12,16 @@ public class OccupancyManager {
         this.allocatedPremiumRooms = allocatedPremiumRooms;
         this.totalPremiumPrice = totalPremiumPrice;
     }
+
     public static OccupancyManager of(int totalEconomyPrice,
                                       int allocatedEconomyRooms,
                                       int allocatedPremiumRooms,
                                       int totalPremiumPrice) {
 
-        OccupancyManager om = new OccupancyManager(totalEconomyPrice,
-                                allocatedEconomyRooms,
-                                allocatedPremiumRooms,
-                                totalPremiumPrice);
-        om.grandTotal = totalEconomyPrice + totalPremiumPrice;
-        return om;
+        return new OccupancyManager(totalEconomyPrice,
+                allocatedEconomyRooms,
+                allocatedPremiumRooms,
+                totalPremiumPrice);
     }
 
     public int getTotalEconomyPrice() {
@@ -59,7 +57,7 @@ public class OccupancyManager {
     }
 
     public int getGrandTotal() {
-        return grandTotal;
+        return this.totalEconomyPrice + this.totalPremiumPrice;
     }
 
 }

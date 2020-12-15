@@ -15,26 +15,26 @@ import java.util.Map;
 @RequestMapping("${server.error.path:${error.path:/error}}")
 public class BasicErrorController extends AbstractErrorController {
 
-	public BasicErrorController(ErrorAttributes errorAttributes) {
-		super(errorAttributes);
-		
-	}
+    public BasicErrorController(ErrorAttributes errorAttributes) {
+        super(errorAttributes);
 
-	@RequestMapping
-	public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
-		@SuppressWarnings("deprecation")
-		Map<String, Object> body = getErrorAttributes(request,	isIncludeStackTrace(request, MediaType.ALL));
-		HttpStatus status = getStatus(request);
-		return new ResponseEntity<>(body, status);
-	}
+    }
 
-	private boolean isIncludeStackTrace(HttpServletRequest request, MediaType all) {
-		return true;
-	}
+    @RequestMapping
+    public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+        @SuppressWarnings("deprecation")
+        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.ALL));
+        HttpStatus status = getStatus(request);
+        return new ResponseEntity<>(body, status);
+    }
 
-	@Override
-	public String getErrorPath() {
-		return "/error";
-	}
-	
+    private boolean isIncludeStackTrace(HttpServletRequest request, MediaType all) {
+        return true;
+    }
+
+    @Override
+    public String getErrorPath() {
+        return "/error";
+    }
+
 }

@@ -12,25 +12,25 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler({ PotentialGuestsException.class })
-	public ResponseEntity<Object> potentialGuestsException(Exception ex, WebRequest request) {
-		ErrorResponse errors = new ErrorResponse();
-		errors.setErrorCode(String.valueOf(HttpStatus.UNAUTHORIZED));
-		errors.setDescription("Potential Guests not found");
-		errors.setStatus(HttpStatus.NOT_FOUND);
-		errors.setTimestamp(LocalDateTime.now());
+    @ExceptionHandler({PotentialGuestsException.class})
+    public ResponseEntity<Object> potentialGuestsException(Exception ex, WebRequest request) {
+        ErrorResponse errors = new ErrorResponse();
+        errors.setErrorCode(String.valueOf(HttpStatus.UNAUTHORIZED));
+        errors.setDescription("Potential Guests not found");
+        errors.setStatus(HttpStatus.NOT_FOUND);
+        errors.setTimestamp(LocalDateTime.now());
 
-		return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
-	}
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
 
-	@ExceptionHandler({ FileNotFoundException.class })
-	public ResponseEntity<Object> fileNotFound(Exception ex, WebRequest request) {
-		ErrorResponse errors = new ErrorResponse();
-		errors.setErrorCode(String.valueOf(HttpStatus.UNAUTHORIZED));
-		errors.setDescription("Potential Guests file not found "+ex.getMessage());
-		errors.setStatus(HttpStatus.NOT_FOUND);
-		errors.setTimestamp(LocalDateTime.now());
+    @ExceptionHandler({FileNotFoundException.class})
+    public ResponseEntity<Object> fileNotFound(Exception ex, WebRequest request) {
+        ErrorResponse errors = new ErrorResponse();
+        errors.setErrorCode(String.valueOf(HttpStatus.UNAUTHORIZED));
+        errors.setDescription("Potential Guests file not found " + ex.getMessage());
+        errors.setStatus(HttpStatus.NOT_FOUND);
+        errors.setTimestamp(LocalDateTime.now());
 
-		return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
-	}
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
 }

@@ -1,10 +1,5 @@
 package com.rooms.occupancy.manager.beans;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-
 public class Occupancy {
     private Integer premium;
     private Integer economy;
@@ -14,9 +9,10 @@ public class Occupancy {
         this.premium = premium;
         this.economy = economy;
     }
+
     public static Occupancy of(Integer premium,
                                Integer economy) {
-    return new Occupancy(premium, economy);
+        return new Occupancy(premium, economy);
     }
 
     public Integer getPremium() {

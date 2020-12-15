@@ -1,6 +1,9 @@
 package com.rooms.occupancy.manager.util;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.rooms.occupancy.manager.beans.PotentialGuest;
 import com.rooms.occupancy.manager.exception.FileNotFoundException;
 import com.rooms.occupancy.manager.exception.PotentialGuestsException;
@@ -9,21 +12,26 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PotentialGuests {
 
     private static final String GUESTS = "guests";
     private static final String FILE_NAME = "potential-guests.json";
     private static final int PREMIUM_START_PRICE = 100;
-    private static PotentialGuest potentialGuests = null;
+    private static final AtomicReference<PotentialGuest> potentialGuests = new AtomicReference<>();
 
-    private PotentialGuests() {}
+    private PotentialGuests() {
+    }
 
     public static PotentialGuest getPotentialGuests() {
-        if(potentialGuests == null)
-            potentialGuests = readGuestData();
-        return potentialGuests;
+        if (potentialGuests.get() == null)
+            potentialGuests.set(readGuestData());
+        return potentialGuests.get();
     }
 
     private static PotentialGuest readGuestData() {
@@ -60,10 +68,10 @@ public class PotentialGuests {
         }
 
         JsonObject parser = JsonParser.parseReader(reader)
-                                        .getAsJsonObject();
+                .getAsJsonObject();
         JsonElement element = parser.get(GUESTS);
-        if(element == null)
-           throw new PotentialGuestsException(FILE_NAME);
+        if (element == null)
+            throw new PotentialGuestsException(FILE_NAME);
 
         return Optional.of(element.getAsJsonArray());
     }

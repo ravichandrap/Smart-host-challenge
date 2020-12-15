@@ -8,44 +8,44 @@ import java.time.LocalDateTime;
 
 public class ErrorResponse implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	private HttpStatus status;
-	private String errorCode;
-	private String description;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
-	private LocalDateTime timestamp;
+    private static final long serialVersionUID = 1L;
 
-	public HttpStatus getStatus() {
-		return status;
-	}
+    private HttpStatus status;
+    private String errorCode;
+    private String description;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    private LocalDateTime timestamp;
 
-	public void setStatus(HttpStatus status) {
-		this.status = status;
-	}
+    public HttpStatus getStatus() {
+        return status;
+    }
 
-	public String getErrorCode() {
-		return errorCode;
-	}
+    public void setStatus(HttpStatus status) {
+        this.status = status;
+    }
 
-	public void setErrorCode(String errorCode) {
-		this.errorCode = errorCode;
-	}
+    public String getErrorCode() {
+        return errorCode;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public LocalDateTime getTimestamp() {
-		return timestamp;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setTimestamp(LocalDateTime timestamp) {
-		this.timestamp = timestamp;
-	}
-	
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
 }
