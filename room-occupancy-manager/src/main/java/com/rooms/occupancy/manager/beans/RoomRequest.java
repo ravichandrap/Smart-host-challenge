@@ -1,5 +1,8 @@
 package com.rooms.occupancy.manager.beans;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel("")
 public class RoomRequest {
     private Integer premiumRooms;
     private Integer economyRooms;

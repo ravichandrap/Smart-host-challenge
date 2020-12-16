@@ -25,7 +25,7 @@ class RoomManagerControllerTest {
     RoomManagerService service;
 
     @InjectMocks
-    RoomManagerController controller = new RoomManagerController();
+    RoomManagerController controller = new RoomManagerController(service);
 
     @Test
     void testOccupancy() throws IOException {

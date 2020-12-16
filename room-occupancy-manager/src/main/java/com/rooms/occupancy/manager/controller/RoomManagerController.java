@@ -12,11 +12,13 @@ import java.io.IOException;
 @RequestMapping("/api/v1/room")
 public class RoomManagerController {
 
-    @Autowired
-    private RoomManagerService service;
+    RoomManagerController(RoomManagerService service) {
+        this.service = service;
+    }
+    private final RoomManagerService service;
 
     @PostMapping
-    public OccupancyManager occupancy(@RequestBody RoomRequest room) throws IOException {
+    public OccupancyManager occupancy(@RequestBody RoomRequest room) {
         return service.getOccupancy(room);
     }
 

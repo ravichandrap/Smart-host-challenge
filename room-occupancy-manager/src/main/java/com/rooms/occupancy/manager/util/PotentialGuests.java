@@ -16,22 +16,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class PotentialGuests {
 
     private static final String GUESTS = "guests";
     private static final String FILE_NAME = "potential-guests.json";
     private static final int PREMIUM_START_PRICE = 100;
-    private static final AtomicReference<PotentialGuest> potentialGuests = new AtomicReference<>();
+    private static  PotentialGuest potentialGuests = null;
 
     private PotentialGuests() {
     }
 
     public static PotentialGuest getPotentialGuests() {
-        if (potentialGuests.get() == null)
-            potentialGuests.set(readGuestData());
-        return potentialGuests.get();
+        if (potentialGuests == null)
+            potentialGuests = readGuestData();
+        return potentialGuests;
     }
 
     private static PotentialGuest readGuestData() {
@@ -52,10 +51,14 @@ public class PotentialGuests {
                 premium.add(value);
             }
         });
-        premium.sort(Collections.reverseOrder());
-        economy.sort(Collections.reverseOrder());
+        sort(premium);
+        sort(economy);
 
         return PotentialGuest.of(premium, economy);
+    }
+
+    private static void sort(List<Integer> list) {
+        list.sort(Collections.reverseOrder());
     }
 
     private static Optional<JsonArray> readFile() {
