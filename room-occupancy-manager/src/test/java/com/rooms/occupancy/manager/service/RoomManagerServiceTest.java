@@ -67,5 +67,20 @@ class RoomManagerServiceTest {
         assertEquals(om.getGrandTotal(), occupancy.getGrandTotal());
     }
 
+    @Test
+    void testGetOccupancy5() throws IOException {
+        RoomRequest roomRequest = RoomRequest.of(0, 1);
+        final OccupancyManager om =
+                OccupancyManager.of(99, 1, 0, 0);
+        final OccupancyManager occupancy = service.getOccupancy(roomRequest);
+        assertNotNull(occupancy);
+        assertEquals(om.getAllocatedPremiumRooms(), occupancy.getAllocatedPremiumRooms());
+        assertEquals(om.getAllocatedEconomyRooms(), om.getAllocatedEconomyRooms());
+        assertEquals(om.getTotalEconomyPrice(), occupancy.getTotalEconomyPrice());
+        assertEquals(om.getTotalPremiumPrice(), occupancy.getTotalPremiumPrice());
+        assertEquals(om.getGrandTotal(), occupancy.getGrandTotal());
+    }
+
+
 
 }

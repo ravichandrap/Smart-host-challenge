@@ -1,22 +1,29 @@
 package com.rooms.occupancy.manager.beans;
 
 public class OccupancyManager {
-    private int totalEconomyPrice;
-    private int allocatedEconomyRooms;
-    private int allocatedPremiumRooms;
-    private int totalPremiumPrice;
+    private Integer totalEconomyPrice = 0;
+    private Integer allocatedEconomyRooms = 0;
+    private Integer allocatedPremiumRooms = 0;
+    private Integer totalPremiumPrice = 0;
+    public OccupancyManager() {
 
-    private OccupancyManager(final int totalEconomyPrice, final int allocatedEconomyRooms, final int allocatedPremiumRooms, final int totalPremiumPrice) {
+    }
+    public static OccupancyManager empty() {
+        return new OccupancyManager(0,0,0,0);
+
+    }
+
+    public OccupancyManager(final Integer totalEconomyPrice, final Integer allocatedEconomyRooms, final Integer allocatedPremiumRooms, final Integer totalPremiumPrice) {
         this.totalEconomyPrice = totalEconomyPrice;
         this.allocatedEconomyRooms = allocatedEconomyRooms;
         this.allocatedPremiumRooms = allocatedPremiumRooms;
         this.totalPremiumPrice = totalPremiumPrice;
     }
 
-    public static OccupancyManager of(final int totalEconomyPrice,
-                                      final int allocatedEconomyRooms,
-                                      final int allocatedPremiumRooms,
-                                      final int totalPremiumPrice) {
+    public static OccupancyManager of(final Integer totalEconomyPrice,
+                                      final Integer allocatedEconomyRooms,
+                                      final Integer allocatedPremiumRooms,
+                                      final Integer totalPremiumPrice) {
 
         return new OccupancyManager(totalEconomyPrice,
                 allocatedEconomyRooms,
@@ -24,39 +31,39 @@ public class OccupancyManager {
                 totalPremiumPrice);
     }
 
-    public int getTotalEconomyPrice() {
+    public Integer getTotalEconomyPrice() {
         return totalEconomyPrice;
     }
 
-    public void setTotalEconomyPrice(final int totalEconomyPrice) {
+    public void setTotalEconomyPrice(final Integer totalEconomyPrice) {
         this.totalEconomyPrice = totalEconomyPrice;
     }
 
-    public int getAllocatedEconomyRooms() {
+    public Integer getAllocatedEconomyRooms() {
         return allocatedEconomyRooms;
     }
 
-    public void setAllocatedEconomyRooms(final int allocatedEconomyRooms) {
+    public void setAllocatedEconomyRooms(final Integer allocatedEconomyRooms) {
         this.allocatedEconomyRooms = allocatedEconomyRooms;
     }
 
-    public int getAllocatedPremiumRooms() {
+    public Integer getAllocatedPremiumRooms() {
         return allocatedPremiumRooms;
     }
 
-    public void setAllocatedPremiumRooms(final int allocatedPremiumRooms) {
+    public void setAllocatedPremiumRooms(final Integer allocatedPremiumRooms) {
         this.allocatedPremiumRooms = allocatedPremiumRooms;
     }
 
-    public int getTotalPremiumPrice() {
+    public Integer getTotalPremiumPrice() {
         return totalPremiumPrice;
     }
 
-    public void setTotalPremiumPrice(final int totalPremiumPrice) {
+    public void setTotalPremiumPrice(final Integer totalPremiumPrice) {
         this.totalPremiumPrice = totalPremiumPrice;
     }
 
-    public int getGrandTotal() {
+    public Integer getGrandTotal() {
         return this.totalEconomyPrice + this.totalPremiumPrice;
     }
 

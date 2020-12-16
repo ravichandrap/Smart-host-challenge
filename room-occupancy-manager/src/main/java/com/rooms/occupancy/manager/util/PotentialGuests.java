@@ -26,22 +26,29 @@ public class PotentialGuests {
     private static final String GUESTS = "guests";
     private static final String FILE_NAME = "potential-guests.json";
     private static final int PREMIUM_START_PRICE = 100;
-    private static final PotentialGuest ptlGuests = readGuestData();
+    private static final Optional<PotentialGuest> ptlGuests = readGuestData();
 
     private PotentialGuests() {
     }
 
-    public static PotentialGuest getPotentialGuests() {
+    public static Optional<PotentialGuest> getPotentialGuests() {
         return ptlGuests;
     }
 
-    private static PotentialGuest readGuestData() {
-        final Optional<JsonArray> optional = readFile();
-        final JsonArray guestsArray = optional.orElseThrow(() -> new PotentialGuestsException(FILE_NAME));
-        return getRoomTypeListMap(guestsArray);
+    private static Optional<PotentialGuest> readGuestData() {
+        return getRoomTypeListMap(readFile());
     }
 
-    private static PotentialGuest getRoomTypeListMap(JsonArray guestsArray) {
+    private static Optional<PotentialGuest> getRoomTypeListMap(Optional<JsonArray> guestsOptional) {
+
+        if (guestsOptional.isEmpty()) {
+            return Optional.empty();
+        }
+
+        JsonArray guestsArray = guestsOptional.get();
+        if(guestsArray.size() == 0)
+            return Optional.empty();
+
         List<Integer> premium = new ArrayList<>();
         List<Integer> economy = new ArrayList<>();
 
@@ -60,7 +67,7 @@ public class PotentialGuests {
         LOG.debug("Premium Guest: {} and Economy Guests: {}", premium, economy);
         LOG.debug("Premium Guest: {} and Economy Guests: {}", premium.stream().reduce(0, Integer::sum),
                 economy.stream().reduce(0, Integer::sum));
-        return PotentialGuest.of(premium, economy);
+        return Optional.of(PotentialGuest.of(premium, economy));
     }
 
     private static void sort(List<Integer> list) {

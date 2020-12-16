@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @SpringBootTest
 class PotentialGuestsTest {
@@ -16,7 +17,7 @@ class PotentialGuestsTest {
 
     @Test
     void testGetPotentialGuests() throws IOException {
-        PotentialGuest potentialGuests = PotentialGuests.getPotentialGuests();
+        Optional<PotentialGuest> potentialGuests = PotentialGuests.getPotentialGuests();
         assertNotNull(potentialGuests);
     }
 }
