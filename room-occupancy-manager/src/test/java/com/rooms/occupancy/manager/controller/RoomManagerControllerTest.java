@@ -6,8 +6,7 @@ import com.rooms.occupancy.manager.service.RoomManagerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
@@ -27,10 +26,10 @@ class RoomManagerControllerTest {
     void testOccupancy() throws IOException {
         RoomRequest roomRequest
                 = RoomRequest.of(7, 5);
-//        OccupancyManager occupancy = OccupancyManager.of(6, 4);
-
-//        Mockito.when(service.getOccupancy(roomRequest))
-//                .thenReturn(occupancy);
+        OccupancyManager occupancyManager =
+                OccupancyManager.of(189, 4, 6, 1054);
+        Mockito.when(service.getOccupancy(roomRequest))
+                .thenReturn(occupancyManager);
         OccupancyManager occupancyResponse = controller.occupancy(roomRequest);
         assertNotNull(occupancyResponse);
 
