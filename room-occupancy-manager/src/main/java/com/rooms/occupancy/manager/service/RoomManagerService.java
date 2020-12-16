@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class RoomManagerService {
 
-    public OccupancyManager getOccupancy(RoomRequest room) throws IOException {
+    public OccupancyManager getOccupancy(RoomRequest room)  {
         PotentialGuest potentialGuests = PotentialGuests.getPotentialGuests();
         return calculateOccupancy(room, potentialGuests);
     }
@@ -73,9 +73,8 @@ public class RoomManagerService {
         final int premiumSize = potentialGuests.getPremium().size();
         if (room.getPremiumRooms() <= premiumSize)
             return room.getPremiumRooms();
-        else if (room.getPremiumRooms() > premiumSize)
+        else //if (room.getPremiumRooms() > premiumSize)
             return premiumSize;
-        return 0;
     }
 
     private int filterGuests(List<Integer> list,

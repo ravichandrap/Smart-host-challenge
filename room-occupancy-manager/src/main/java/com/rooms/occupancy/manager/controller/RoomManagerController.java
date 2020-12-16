@@ -4,14 +4,11 @@ import com.rooms.occupancy.manager.beans.OccupancyManager;
 import com.rooms.occupancy.manager.beans.RoomRequest;
 import com.rooms.occupancy.manager.service.RoomManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/room")
 public class RoomManagerController {
 

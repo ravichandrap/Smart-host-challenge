@@ -1,0 +1,24 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: ROOM-OCCUPANCY-MANAGER
+
+logging:
+  level:
+    root: INFO
+
+app:
+  name: Room Occupancy Manager
+  api:
+    title: Room Occupancy Manager APIs
+    version: 1.0.0
+    description: Room Occupancy
+    base-package: com.rooms.occupancy.manager.controller
+    contact-name: ravi
+    contact-email: rc.reddy@outlook.com
+    logging:
+      enable: true
+      url-patterns: /api/v1/*
+      requestIdParamName: reqId
