@@ -4,7 +4,7 @@ public class PotentialGuestsException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public PotentialGuestsException(String msg) {
+    public PotentialGuestsException(final String msg) {
         super("Potential Guests not found in resource: " + msg);
     }
 

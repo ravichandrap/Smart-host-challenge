@@ -4,14 +4,14 @@ public class Occupancy {
     private Integer premium;
     private Integer economy;
 
-    Occupancy(Integer premium,
-              Integer economy) {
+    Occupancy(final Integer premium,
+              final Integer economy) {
         this.premium = premium;
         this.economy = economy;
     }
 
-    public static Occupancy of(Integer premium,
-                               Integer economy) {
+    public static Occupancy of(final Integer premium,
+                               final Integer economy) {
         return new Occupancy(premium, economy);
     }
 
@@ -19,7 +19,7 @@ public class Occupancy {
         return premium;
     }
 
-    public void setPremium(Integer premium) {
+    public void setPremium(final Integer premium) {
         this.premium = premium;
     }
 
@@ -27,7 +27,7 @@ public class Occupancy {
         return economy;
     }
 
-    public void setEconomy(Integer economy) {
+    public void setEconomy(final Integer economy) {
         this.economy = economy;
     }
 

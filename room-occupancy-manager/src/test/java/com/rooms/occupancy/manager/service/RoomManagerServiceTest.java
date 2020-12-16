@@ -3,6 +3,8 @@ package com.rooms.occupancy.manager.service;
 import com.rooms.occupancy.manager.beans.OccupancyManager;
 import com.rooms.occupancy.manager.beans.RoomRequest;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
@@ -11,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class RoomManagerServiceTest {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RoomManagerServiceTest.class);
+
 
     RoomManagerService service = new RoomManagerService();
 
@@ -24,7 +29,7 @@ class RoomManagerServiceTest {
         OccupancyManager occupancy = service.getOccupancy(roomRequest);
         print(occupancy);
         print(occupancyManager);
-        System.out.println("------------------------------------");
+        LOG.debug("------------------------------------");
         assertNotNull(occupancy);
 
     }
@@ -39,7 +44,7 @@ class RoomManagerServiceTest {
         OccupancyManager occupancy = service.getOccupancy(roomRequest);
         print(occupancy);
         print(occupancyManager);
-        System.out.println("------------------------------------");
+        LOG.debug("------------------------------------");
         assertNotNull(occupancy);
     }
 
@@ -53,7 +58,7 @@ class RoomManagerServiceTest {
         OccupancyManager occupancy = service.getOccupancy(roomRequest);
         print(occupancy);
         print(occupancyManager);
-        System.out.println("------------------------------------");
+        LOG.debug("------------------------------------");
         assertNotNull(occupancy);
     }
 
@@ -62,18 +67,18 @@ class RoomManagerServiceTest {
         //Guests: 22, 23, 45, 99, 100, 101, 115, 155, 209, 374
 
         RoomRequest roomRequest = RoomRequest.of(7, 1);
-        OccupancyManager occupancyManager =
+        final OccupancyManager occupancyManager =
                 OccupancyManager.of(45, 1, 7, 1153);
-        OccupancyManager occupancy = service.getOccupancy(roomRequest);
+        final OccupancyManager occupancy = service.getOccupancy(roomRequest);
         print(occupancy);
         print(occupancyManager);
-        System.out.println("------------------------------------");
+        LOG.debug("------------------------------------");
         assertNotNull(occupancy);
 //        assertEquals(occupancy.getAllocatedPremiumRooms(), );
     }
 
-    private static void print(OccupancyManager occupancy) {
-        System.out.printf("Premium: Rooms:%d, Price:%d ; Economy: Rooms:%d, Price:%d %n",
+    private static void print(final OccupancyManager occupancy) {
+        LOG.debug("Premium: Rooms:{}, Price:{} ; Economy: Rooms:{}, Price:{} %n",
                 occupancy.getAllocatedPremiumRooms(),
                 occupancy.getTotalPremiumPrice(),
                 occupancy.getAllocatedEconomyRooms(),

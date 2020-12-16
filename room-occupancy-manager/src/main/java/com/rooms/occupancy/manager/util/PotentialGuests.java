@@ -7,6 +7,8 @@ import com.google.gson.JsonParser;
 import com.rooms.occupancy.manager.beans.PotentialGuest;
 import com.rooms.occupancy.manager.exception.FileNotFoundException;
 import com.rooms.occupancy.manager.exception.PotentialGuestsException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -19,23 +21,23 @@ import java.util.Optional;
 
 public class PotentialGuests {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PotentialGuests.class);
+
     private static final String GUESTS = "guests";
     private static final String FILE_NAME = "potential-guests.json";
     private static final int PREMIUM_START_PRICE = 100;
-    private static  PotentialGuest potentialGuests = null;
+    private static final PotentialGuest ptlGuests = readGuestData();
 
     private PotentialGuests() {
     }
 
     public static PotentialGuest getPotentialGuests() {
-        if (potentialGuests == null)
-            potentialGuests = readGuestData();
-        return potentialGuests;
+        return ptlGuests;
     }
 
     private static PotentialGuest readGuestData() {
-        Optional<JsonArray> optional = readFile();
-        JsonArray guestsArray = optional.orElseThrow(() -> new PotentialGuestsException(FILE_NAME));
+        final Optional<JsonArray> optional = readFile();
+        final JsonArray guestsArray = optional.orElseThrow(() -> new PotentialGuestsException(FILE_NAME));
         return getRoomTypeListMap(guestsArray);
     }
 
@@ -54,6 +56,8 @@ public class PotentialGuests {
         sort(premium);
         sort(economy);
 
+        LOG.debug("Premium Guest: {} and Economy Guests: {}", premium, economy);
+
         return PotentialGuest.of(premium, economy);
     }
 
@@ -62,12 +66,12 @@ public class PotentialGuests {
     }
 
     private static Optional<JsonArray> readFile() {
-        Reader reader = null;
+        LOG.debug("Read file, File name:{}", FILE_NAME);
+        Reader reader;
         try {
             reader = Files.newBufferedReader(Paths.get(FILE_NAME));
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new FileNotFoundException(FILE_NAME);
+            throw new FileNotFoundException(e.getMessage());
         }
 
         JsonObject parser = JsonParser.parseReader(reader)

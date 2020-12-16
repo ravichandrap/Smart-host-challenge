@@ -20,7 +20,7 @@ public class ErrorResponse implements Serializable {
         return status;
     }
 
-    public void setStatus(HttpStatus status) {
+    public void setStatus(final HttpStatus status) {
         this.status = status;
     }
 
@@ -28,7 +28,7 @@ public class ErrorResponse implements Serializable {
         return errorCode;
     }
 
-    public void setErrorCode(String errorCode) {
+    public void setErrorCode(final String errorCode) {
         this.errorCode = errorCode;
     }
 
@@ -36,7 +36,7 @@ public class ErrorResponse implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -44,7 +44,7 @@ public class ErrorResponse implements Serializable {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(final LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

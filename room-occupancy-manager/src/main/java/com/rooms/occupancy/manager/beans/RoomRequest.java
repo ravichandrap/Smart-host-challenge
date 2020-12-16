@@ -7,12 +7,12 @@ public class RoomRequest {
     private Integer premiumRooms;
     private Integer economyRooms;
 
-    public RoomRequest(Integer premiumRooms, Integer economyRooms) {
+    public RoomRequest(final Integer premiumRooms, final Integer economyRooms) {
         this.premiumRooms = premiumRooms;
         this.economyRooms = economyRooms;
     }
 
-    public static RoomRequest of(Integer premiumRooms, Integer economyRooms) {
+    public static RoomRequest of(final Integer premiumRooms, final Integer economyRooms) {
         return new RoomRequest(premiumRooms, economyRooms);
     }
 
@@ -20,7 +20,7 @@ public class RoomRequest {
         return premiumRooms;
     }
 
-    public void setPremiumRooms(Integer premiumRooms) {
+    public void setPremiumRooms(final Integer premiumRooms) {
         this.premiumRooms = premiumRooms;
     }
 
@@ -28,7 +28,7 @@ public class RoomRequest {
         return economyRooms;
     }
 
-    public void setEconomyRooms(Integer economyRooms) {
+    public void setEconomyRooms(final Integer economyRooms) {
         this.economyRooms = economyRooms;
     }
 

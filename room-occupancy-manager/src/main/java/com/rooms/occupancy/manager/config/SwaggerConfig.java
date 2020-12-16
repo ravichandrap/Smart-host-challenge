@@ -1,5 +1,7 @@
 package com.rooms.occupancy.manager.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,7 @@ import java.time.LocalDate;
 @EnableSwagger2
 @ConfigurationProperties("app.api")
 public class SwaggerConfig {
+	private static final Logger LOG = LoggerFactory.getLogger(SwaggerConfig.class);
 
 	private String version;
 	
@@ -35,7 +38,7 @@ public class SwaggerConfig {
 	
 	@PostConstruct
 	public void init() {
-		System.out.println(basePackage);
+		LOG.info(basePackage);
 	}
 	
 	@Bean
@@ -63,7 +66,7 @@ public class SwaggerConfig {
 		return version;
 	}
 
-	public void setVersion(String version) {
+	public void setVersion(final String version) {
 		this.version = version;
 	}
 
@@ -71,7 +74,7 @@ public class SwaggerConfig {
 		return title;
 	}
 
-	public void setTitle(String name) {
+	public void setTitle(final String name) {
 		this.title = name;
 	}
 
@@ -79,7 +82,7 @@ public class SwaggerConfig {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -87,7 +90,7 @@ public class SwaggerConfig {
 		return basePackage;
 	}
 
-	public void setBasePackage(String basePackage) {
+	public void setBasePackage(final String basePackage) {
 		this.basePackage = basePackage;
 	}
 
@@ -95,7 +98,7 @@ public class SwaggerConfig {
 		return contactName;
 	}
 
-	public void setContactName(String contactName) {
+	public void setContactName(final String contactName) {
 		this.contactName = contactName;
 	}
 
@@ -103,7 +106,7 @@ public class SwaggerConfig {
 		return contactEmail;
 	}
 
-	public void setContactEmail(String contactEmail) {
+	public void setContactEmail(final String contactEmail) {
 		this.contactEmail = contactEmail;
 	}
 }

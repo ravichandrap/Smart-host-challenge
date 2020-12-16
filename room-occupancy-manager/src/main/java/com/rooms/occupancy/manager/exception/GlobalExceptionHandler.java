@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({PotentialGuestsException.class})
-    public ResponseEntity<Object> potentialGuestsException(Exception ex, WebRequest request) {
-        ErrorResponse errors = new ErrorResponse();
+    public ResponseEntity<Object> potentialGuestsException(final Exception ex, final WebRequest request) {
+        final ErrorResponse errors = new ErrorResponse();
         errors.setErrorCode(String.valueOf(HttpStatus.UNAUTHORIZED));
         errors.setDescription("Potential Guests not found");
         errors.setStatus(HttpStatus.NOT_FOUND);
@@ -24,8 +24,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({FileNotFoundException.class})
-    public ResponseEntity<Object> fileNotFound(Exception ex, WebRequest request) {
-        ErrorResponse errors = new ErrorResponse();
+    public ResponseEntity<Object> fileNotFound(final Exception ex, final WebRequest request) {
+        final ErrorResponse errors = new ErrorResponse();
         errors.setErrorCode(String.valueOf(HttpStatus.UNAUTHORIZED));
         errors.setDescription("Potential Guests file not found " + ex.getMessage());
         errors.setStatus(HttpStatus.NOT_FOUND);

@@ -6,17 +6,17 @@ public class OccupancyManager {
     private int allocatedPremiumRooms;
     private int totalPremiumPrice;
 
-    private OccupancyManager(int totalEconomyPrice, int allocatedEconomyRooms, int allocatedPremiumRooms, int totalPremiumPrice) {
+    private OccupancyManager(final int totalEconomyPrice, final int allocatedEconomyRooms, final int allocatedPremiumRooms, final int totalPremiumPrice) {
         this.totalEconomyPrice = totalEconomyPrice;
         this.allocatedEconomyRooms = allocatedEconomyRooms;
         this.allocatedPremiumRooms = allocatedPremiumRooms;
         this.totalPremiumPrice = totalPremiumPrice;
     }
 
-    public static OccupancyManager of(int totalEconomyPrice,
-                                      int allocatedEconomyRooms,
-                                      int allocatedPremiumRooms,
-                                      int totalPremiumPrice) {
+    public static OccupancyManager of(final int totalEconomyPrice,
+                                      final int allocatedEconomyRooms,
+                                      final int allocatedPremiumRooms,
+                                      final int totalPremiumPrice) {
 
         return new OccupancyManager(totalEconomyPrice,
                 allocatedEconomyRooms,
@@ -28,7 +28,7 @@ public class OccupancyManager {
         return totalEconomyPrice;
     }
 
-    public void setTotalEconomyPrice(int totalEconomyPrice) {
+    public void setTotalEconomyPrice(final int totalEconomyPrice) {
         this.totalEconomyPrice = totalEconomyPrice;
     }
 
@@ -36,7 +36,7 @@ public class OccupancyManager {
         return allocatedEconomyRooms;
     }
 
-    public void setAllocatedEconomyRooms(int allocatedEconomyRooms) {
+    public void setAllocatedEconomyRooms(final int allocatedEconomyRooms) {
         this.allocatedEconomyRooms = allocatedEconomyRooms;
     }
 
@@ -44,7 +44,7 @@ public class OccupancyManager {
         return allocatedPremiumRooms;
     }
 
-    public void setAllocatedPremiumRooms(int allocatedPremiumRooms) {
+    public void setAllocatedPremiumRooms(final int allocatedPremiumRooms) {
         this.allocatedPremiumRooms = allocatedPremiumRooms;
     }
 
@@ -52,7 +52,7 @@ public class OccupancyManager {
         return totalPremiumPrice;
     }
 
-    public void setTotalPremiumPrice(int totalPremiumPrice) {
+    public void setTotalPremiumPrice(final int totalPremiumPrice) {
         this.totalPremiumPrice = totalPremiumPrice;
     }
 

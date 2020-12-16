@@ -3,15 +3,15 @@ package com.rooms.occupancy.manager.beans;
 import java.util.List;
 
 public class PotentialGuest {
-    List<Integer> premium = null;
-    List<Integer> economy = null;
+    List<Integer> premium;
+    List<Integer> economy;
 
-    private PotentialGuest(List<Integer> premium, List<Integer> economy) {
+    private PotentialGuest(final List<Integer> premium, final List<Integer> economy) {
         this.economy = economy;
         this.premium = premium;
     }
 
-    public static PotentialGuest of(List<Integer> premium, List<Integer> economy) {
+    public static PotentialGuest of(final List<Integer> premium, final List<Integer> economy) {
         return new PotentialGuest(premium, economy);
     }
 
@@ -19,7 +19,7 @@ public class PotentialGuest {
         return premium;
     }
 
-    public void setPremium(List<Integer> premium) {
+    public void setPremium(final List<Integer> premium) {
         this.premium = premium;
     }
 
@@ -27,7 +27,7 @@ public class PotentialGuest {
         return economy;
     }
 
-    public void setEconomy(List<Integer> economy) {
+    public void setEconomy(final List<Integer> economy) {
         this.economy = economy;
     }
 }
