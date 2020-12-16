@@ -12,6 +12,8 @@ public class RoomRequest {
         this.economyRooms = economyRooms;
     }
 
+
+
     public static RoomRequest of(final Integer premiumRooms, final Integer economyRooms) {
         return new RoomRequest(premiumRooms, economyRooms);
     }
