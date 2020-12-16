@@ -53,11 +53,13 @@ public class PotentialGuests {
                 premium.add(value);
             }
         });
+
         sort(premium);
         sort(economy);
 
         LOG.debug("Premium Guest: {} and Economy Guests: {}", premium, economy);
-
+        LOG.debug("Premium Guest: {} and Economy Guests: {}", premium.stream().reduce(0, Integer::sum),
+                economy.stream().reduce(0, Integer::sum));
         return PotentialGuest.of(premium, economy);
     }
 
@@ -71,7 +73,8 @@ public class PotentialGuests {
         try {
             reader = Files.newBufferedReader(Paths.get(FILE_NAME));
         } catch (IOException e) {
-            throw new FileNotFoundException(e.getMessage());
+            LOG.error("ERROR:readFile {} : {} ", FILE_NAME, e.getMessage());
+            throw new FileNotFoundException(FILE_NAME+" : "+e.getMessage());
         }
 
         JsonObject parser = JsonParser.parseReader(reader)
