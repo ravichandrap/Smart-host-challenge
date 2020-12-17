@@ -43,7 +43,7 @@ public class SwaggerConfig {
 
     /**
      * Configuring application information
-     * @return
+     * @return app info
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

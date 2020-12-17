@@ -12,4 +12,8 @@ public class OccupancyManager {
     private int allocatedEconomyRooms;
     private int allocatedPremiumRooms;
     private int totalPremiumPrice;
+    //Calculate grand total
+    public int getTotal() {
+        return this.totalEconomyPrice+this.totalPremiumPrice;
+    }
 }

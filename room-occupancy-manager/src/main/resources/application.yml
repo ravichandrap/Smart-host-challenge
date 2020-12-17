@@ -18,13 +18,13 @@ guests: [23, 45, 155, 374, 22, 99, 100, 101, 115, 209]
 app:
   name: Room Occupancy Manager
   api:
-    title: Room Occupancy Manager APIs
+    title: Room Occupancy Manager API
     version: 1.0.0
-    description: Room Occupancy
+    description: Room Occupancy Calculator
     base-package: com.rooms.occupancy.manager.controller
-    contact-name: ravi
+    contact-name: Ravichandra Penumuru
     contact-email: rc.reddy@outlook.com
     logging:
       enable: true
-      url-patterns: /api/v1/*
+      url-patterns: /api/*
       requestIdParamName: reqId

@@ -21,7 +21,7 @@ public class RoomManagerService {
      */
     public Optional<OccupancyManager> getOccupancy(final RoomRequest room) {
         if (room.getEconomyRooms() <= 0 && room.getPremiumRooms() <= 0) {
-            return Optional.empty();
+            return Optional.of(new OccupancyManager());
         }
 
         final Optional<PotentialGuest> potentialGuests = PotentialGuestUtils.getPotentialGuests();
@@ -84,7 +84,7 @@ public class RoomManagerService {
      * this Condition satisfies when less rooms then guest.
      * Calculate the rooms and price for Economy,
      * if Premium rooms are available and Economy guests are still waiting for rooms.
-     *  Allocate Premium rooms to the Economy guest and calculate price and rooms
+     * Allocate Premium rooms to the Economy guest and calculate price and rooms
      */
     private void whenLessEconomyRooms(final RoomRequest room,
                                       final PotentialGuest potentialGuests,
