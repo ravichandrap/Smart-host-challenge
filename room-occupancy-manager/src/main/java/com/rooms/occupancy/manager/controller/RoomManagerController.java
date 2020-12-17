@@ -7,29 +7,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/api/v1/room")
+@RequestMapping("/api")
 public class RoomManagerController {
     private static final Logger LOG = LoggerFactory.getLogger(RoomManagerController.class);
+    private final RoomManagerService service;
 
     RoomManagerController(final RoomManagerService service) {
         this.service = service;
     }
-    private final RoomManagerService service;
 
-    @PostMapping
-    public OccupancyManager occupancy(@RequestBody final RoomRequest room) {
+    @PostMapping("/room")
+    public Optional<OccupancyManager> occupancy(@RequestBody final RoomRequest room) {
         LOG.info("occupancy method in RoomManagerController");
         return service.getOccupancy(room);
     }
 
-    /*
-    TO-DO
-    1. JSON file read mock input guests data
-    2. API Call for
-        (input) Free Premium rooms: 3
-        (input) Free Economy rooms: 3
-    3. Service Class to calculate Occupancy
-    4.
-     */
 }

@@ -1,11 +1,13 @@
 package com.rooms.occupancy.manager.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Data
 public class ErrorResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,37 +17,5 @@ public class ErrorResponse implements Serializable {
     private String description;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime timestamp;
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(final HttpStatus status) {
-        this.status = status;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(final String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(final LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
 
 }

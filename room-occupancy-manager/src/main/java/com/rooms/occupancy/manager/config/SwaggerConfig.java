@@ -1,5 +1,6 @@
 package com.rooms.occupancy.manager.config;
 
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,101 +13,53 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
-import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Configuration
-@EnableSwagger2
 @ConfigurationProperties("app.api")
+@Data
 public class SwaggerConfig {
-	private static final Logger LOG = LoggerFactory.getLogger(SwaggerConfig.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SwaggerConfig.class);
 
-	private String version;
-	
-	private String title;
-	
-	private String description;
-	
-	private String basePackage;
-	
-	private String contactName;
-	
-	private String contactEmail;
-	
-	@PostConstruct
-	public void init() {
-		LOG.info(basePackage);
-	}
-	
-	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-			.select()
-			.apis(RequestHandlerSelectors.basePackage(basePackage))
-			.paths(PathSelectors.any())
-			.build()
-			.directModelSubstitute(LocalDate.class, String.class)
-			.directModelSubstitute(Timestamp.class, String.class)
-			.apiInfo(apiInfo());
-	}
-	
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder()
-			.title(title)
-			.description(description)
-			.version(version)
-			.contact(new Contact(contactName, null, contactEmail))
-			.build();
-	}
+    private String version;
 
-	public String getVersion() {
-		return version;
-	}
+    private String title;
 
-	public void setVersion(final String version) {
-		this.version = version;
-	}
+    private String description;
 
-	public String getTitle() {
-		return title;
-	}
+    private String basePackage;
 
-	public void setTitle(final String name) {
-		this.title = name;
-	}
+    private String contactName;
 
-	public String getDescription() {
-		return description;
-	}
+    private String contactEmail;
 
-	public void setDescription(final String description) {
-		this.description = description;
-	}
+    @PostConstruct
+    public void init() {
+        LOG.info(basePackage);
+    }
 
-	public String getBasePackage() {
-		return basePackage;
-	}
+    @Bean
+    public Docket api() {
 
-	public void setBasePackage(final String basePackage) {
-		this.basePackage = basePackage;
-	}
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(basePackage))
+                .paths(PathSelectors.any())
+                .build()
+                .directModelSubstitute(LocalDateTime.class, String.class)
+//			.directModelSubstitute(Timestamp.class, String.class)
+                .apiInfo(apiInfo());
+    }
 
-	public String getContactName() {
-		return contactName;
-	}
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title(title)
+                .description(description)
+                .version(version)
+                .contact(new Contact(contactName, null, contactEmail))
+                .build();
+    }
 
-	public void setContactName(final String contactName) {
-		this.contactName = contactName;
-	}
-
-	public String getContactEmail() {
-		return contactEmail;
-	}
-
-	public void setContactEmail(final String contactEmail) {
-		this.contactEmail = contactEmail;
-	}
 }
