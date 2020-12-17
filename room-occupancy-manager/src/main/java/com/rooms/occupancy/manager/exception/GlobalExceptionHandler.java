@@ -15,21 +15,21 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({PotentialGuestsException.class})
-    public ResponseEntity<Object> potentialGuestsException(final Exception ex, final WebRequest request) {
+    public ResponseEntity<Object> potentialGuestsException(final Exception exception, final WebRequest request) {
         final ErrorResponse errors = new ErrorResponse();
-        errors.setErrorCode(String.valueOf(HttpStatus.UNAUTHORIZED));
-        errors.setDescription("Potential Guests not found");
-        errors.setStatus(HttpStatus.NOT_FOUND);
+        errors.setErrorCode(String.valueOf(HttpStatus.BAD_REQUEST));
+        errors.setDescription("Potential Guests Error: "+exception.getMessage());
+        errors.setStatus(HttpStatus.BAD_REQUEST);
         errors.setTimestamp(LocalDateTime.now());
 
-        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({FileNotFoundException.class})
-    public ResponseEntity<Object> fileNotFound(final Exception ex, final WebRequest request) {
+    public ResponseEntity<Object> fileNotFound(final Exception exception, final WebRequest request) {
         final ErrorResponse errors = new ErrorResponse();
-        errors.setErrorCode(String.valueOf(HttpStatus.UNAUTHORIZED));
-        errors.setDescription("Potential Guests file not found " + ex.getMessage());
+        errors.setErrorCode(String.valueOf(HttpStatus.NOT_FOUND));
+        errors.setDescription("Potential Guests file not found " + exception.getMessage());
         errors.setStatus(HttpStatus.NOT_FOUND);
         errors.setTimestamp(LocalDateTime.now());
 

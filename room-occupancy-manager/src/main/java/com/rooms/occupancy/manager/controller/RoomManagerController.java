@@ -15,7 +15,8 @@ public class RoomManagerController {
     private static final Logger LOG = LoggerFactory.getLogger(RoomManagerController.class);
     private final RoomManagerService service;
 
-    RoomManagerController(final RoomManagerService service) {
+    //Constructor injection
+    protected RoomManagerController(final RoomManagerService service) {
         this.service = service;
     }
 
