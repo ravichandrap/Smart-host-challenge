@@ -20,6 +20,11 @@ public class RoomManagerController {
         this.service = service;
     }
 
+    /**
+     * Calculate Occupancy of rooms and guest.
+     * @param room
+     * @return rooms, guests occupancy and price details
+     */
     @PostMapping("/room")
     public Optional<OccupancyManager> occupancy(@RequestBody final RoomRequest room) {
         LOG.info("occupancy method in RoomManagerController");

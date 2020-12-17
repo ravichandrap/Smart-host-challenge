@@ -19,9 +19,13 @@ public final class PotentialGuestUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(PotentialGuestUtils.class);
 
+    //Constant of json key
     private static final String GUESTS = "guests";
+    //Guests file name contains Premium and Economy guests
     private static final String FILE_NAME = "potential-guests.json";
+    //This PRICE separator of Premium and Economy guests
     private static final int PRICE = 100;
+    //Holds Premium and Economy guests
     private static Optional<PotentialGuest> ptlGuests = readGuestData();
 
     private PotentialGuestUtils() {}
@@ -29,15 +33,24 @@ public final class PotentialGuestUtils {
         return ptlGuests;
     }
 
+    /**
+     * Read the Guest data from file.
+     * @return Guest Object contains Premium and Economy guests.
+     */
     private static Optional<PotentialGuest> readGuestData() {
         final Optional<JsonArray> optional = readFile();
         if(optional.isEmpty()) {
             throw new PotentialGuestsException("Something went wrong!");
         }
-        return getRoomTypeListMap(optional);
+        return getGuestDetails(optional);
     }
 
-    private static Optional<PotentialGuest> getRoomTypeListMap(final Optional<JsonArray> guestsOptional) {
+    /**
+     * Get Premium and Economy guests list from json array.
+     * @param guestsOptional Optional guest JSON Array.
+     * @return Guest Object contains Premium and Economy guests.
+     */
+    private static Optional<PotentialGuest> getGuestDetails(final Optional<JsonArray> guestsOptional) {
         LOG.info("Read Guests in getRoomTypeListMap method of PotentialGuestUtils");
         final JsonArray guestsArray = guestsOptional.orElseThrow(()->new PotentialGuestsException("No guest found"));
 
@@ -63,10 +76,18 @@ public final class PotentialGuestUtils {
         return Optional.of(new PotentialGuest(premium, economy));
     }
 
+    /**
+     * Sort the list of Integers in reverse order.
+     * @param list
+     */
     private static void sort(final List<Integer> list) {
         list.sort(Collections.reverseOrder());
     }
 
+    /**
+     * Read guests file from local.
+     * @return JSON Array contains guest.
+     */
     private static Optional<JsonArray> readFile() {
         LOG.debug("Read file, File name:{}", FILE_NAME);
         try(Reader reader = Files.newBufferedReader(Paths.get(FILE_NAME))) {

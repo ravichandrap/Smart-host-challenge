@@ -14,8 +14,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * Throw Exception when non of guest present etc.
+     * @param exception
+     * @param request
+     * @return Response object with error details.
+     */
     @ExceptionHandler({PotentialGuestsException.class})
-    public ResponseEntity<Object> potentialGuestsException(final Exception exception, final WebRequest request) {
+    public ResponseEntity<Object> potentialGuestsException(final Exception exception,
+                                                           final WebRequest request) {
         final ErrorResponse errors = new ErrorResponse();
         errors.setErrorCode(String.valueOf(HttpStatus.BAD_REQUEST));
         errors.setDescription("Potential Guests Error: "+exception.getMessage());
@@ -24,7 +31,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
-
+    /**
+     * Throw Exception when guest file not present.
+     * @param exception
+     * @param request
+     * @return Response object with error details.
+     */
     @ExceptionHandler({FileNotFoundException.class})
     public ResponseEntity<Object> fileNotFound(final Exception exception, final WebRequest request) {
         final ErrorResponse errors = new ErrorResponse();
