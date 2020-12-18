@@ -29,6 +29,7 @@ class RoomManagerServiceTest {
     @Test
     void test_Get_Occupancy_Premium_More_than_Economy()  {
         final Optional<OccupancyManager> optional = service.getOccupancy(new RoomRequest(7, 5));
+        System.out.println(optional.isPresent() ? optional.get().getAllocatedPremiumRooms(): "");
         if(optional.isPresent()) {
             final OccupancyManager occupancy = optional.get();
             assertEquals(6, occupancy.getAllocatedPremiumRooms(), "Premium rooms allocate is equal");
@@ -88,8 +89,15 @@ class RoomManagerServiceTest {
 
     @Test
     void test_Get_Occupancy_With_Zero_Rooms()  {
-        final Optional<OccupancyManager> occupancy = service.getOccupancy(new RoomRequest(0, 0));
-        assertTrue(occupancy.isEmpty(), "Occupancy is empty when rooms are not available");
+        final Optional<OccupancyManager> optional = service.getOccupancy(new RoomRequest(0, 0));
+
+        if(optional.isPresent()) {
+            final OccupancyManager occupancy = optional.get();
+            assertEquals(0, occupancy.getAllocatedEconomyRooms(), "Economy rooms allocate is equal");
+            assertEquals(0, occupancy.getTotalEconomyPrice(), "Total Economy price cost");
+            assertEquals(0, occupancy.getAllocatedPremiumRooms(), "Premium rooms allocate is equal");
+            assertEquals(0, occupancy.getTotalPremiumPrice(), "Total Premium price cost");
+        }
     }
 
 }

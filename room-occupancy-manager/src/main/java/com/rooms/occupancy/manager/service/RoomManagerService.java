@@ -91,16 +91,31 @@ public class RoomManagerService {
                                       final OccupancyManager occupancyManager) {
         occupancyManager.setTotalEconomyPrice(calculateGuestPrice(potentialGuests.getEconomy(), room.getEconomyRooms()));
         occupancyManager.setAllocatedEconomyRooms(room.getEconomyRooms());
-        final int premiumGuestsCount = potentialGuests.getPremium() == null || potentialGuests.getPremium().isEmpty() ? 0 : potentialGuests.getPremium().size();
+        allocatePremiumRooms(room, potentialGuests, occupancyManager);
+    }
+
+    /**
+     * Allocating remaining premium rooms to economy guests.
+     * @param room Number of rooms
+     * @param potentialGuests guest details
+     * @param occupancyManager allocations details
+     */
+    private void allocatePremiumRooms(final RoomRequest room,
+                                      final PotentialGuest potentialGuests,
+                                      final OccupancyManager occupancyManager) {
+        final int premiumGuestsCount = potentialGuests.getPremium() == null
+                                            || potentialGuests.getPremium().isEmpty()
+                                            ? 0 : potentialGuests.getPremium().size();
+
         final int remainingEconomyGuests = potentialGuests.getEconomy().size() - room.getEconomyRooms();
         final int remainingPremiumRooms = room.getPremiumRooms() - premiumGuestsCount;
 
-        // Allocating remaining premium rooms to economy guests.
         if (remainingPremiumRooms > 0 && remainingEconomyGuests > 0) {
-            final int outBound = room.getEconomyRooms() + Math.min(remainingPremiumRooms, potentialGuests.getEconomy().size());
+            final int outBound = room.getEconomyRooms()
+                                + Math.min(remainingPremiumRooms, potentialGuests.getEconomy().size());
 
-            for (final Integer eg : potentialGuests.getEconomy().subList(room.getEconomyRooms(), outBound)) {
-                occupancyManager.setTotalPremiumPrice(occupancyManager.getTotalPremiumPrice() + eg);
+            for (final Integer price : potentialGuests.getEconomy().subList(room.getEconomyRooms(), outBound)) {
+                occupancyManager.setTotalPremiumPrice(occupancyManager.getTotalPremiumPrice() + price);
                 occupancyManager.setAllocatedPremiumRooms(occupancyManager.getAllocatedPremiumRooms() + 1);
             }
         }
