@@ -7,13 +7,15 @@ Our hotel clients have two different categories of rooms: Premium and Economy. O
 Please build a small API that provides an interface for hotels to enter the numbers of Premium and Economy rooms that are available for the night and then tells them immediately how many rooms of each category will be occupied and how much money they will make in total. Potential guests are represented by an array of numbers that is their willingness to pay for the night.
 
 Use the following raw JSON file/structure as mock data for potential guests in your tests: • [23, 45, 155, 374, 22, 99, 100, 101, 115, 209]
-##Testing with jUnit
+
+
+# Testing with jUnit
 ```aidl
     ./gradlew clean test - Unix
     gradlew.bat clean test - Windows
 ```
 
-##Testing with Swagger 
+# Testing with Swagger 
 Run the following gradle command to start the application.
 ```$xslt
     ./gradlew bootRun - Unix
