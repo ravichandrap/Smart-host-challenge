@@ -12,14 +12,14 @@ Use the following raw JSON file/structure as mock data for potential guests in y
 # Testing with jUnit
 ```aidl
     ./gradlew clean test - Unix
-    gradlew.bat clean test - Windows
+    gradle.bat clean test - Windows
 ```
 
 # Testing with Swagger 
 Run the following gradle command to start the application.
 ```$xslt
     ./gradlew bootRun - Unix
-    gradlew.bat bootRun - Windows
+    gradle.bat bootRun - Windows
 ```
 Open Swagger ui in browser.
 [Swagger UI](http://localhost:8089/swagger-ui/#/room-manager-controller/occupancyUsingPOST)
